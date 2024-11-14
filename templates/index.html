@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Gallery</title>
+    <style>
+        .image-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .description {
+            display: none; /* Initially hide descriptions */
+        }
+    </style>
+    <script>
+        function toggleDescription(element) {
+            const description = element.querySelector('.description');
+            description.style.display = description.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Your Gallery</h1>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    <form method="post" enctype="multipart/form-data" action="/upload">
+        <label for="file">Choose file to upload</label>
+        <input type="file" id="file" name="form_file" accept="image/jpeg" required/>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Your Images</h2>
+    {% for file in files %}
+    <div class="image-container" onclick="toggleDescription(this)">
+        <!-- Link to the view_file route instead of get_file -->
+        <a href="{{ url_for('view_file', filename=file.filename) }}">
+            <img src="/files/{{ user_id }}/{{ file.filename }}" alt="{{ file.title }}" style="width:100px;height:auto;">
+        </a>
+        <div class="description">
+            <strong>{{ file.title }}</strong>: {{ file.description }}
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>

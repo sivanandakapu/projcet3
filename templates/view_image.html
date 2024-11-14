@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <!-- Use the image_path variable passed from the view_file function -->
+    <img src="{{ image_path }}" alt="{{ title }}">
+    <p><strong>Description:</strong> {{ description }}</p>
+    <a href="{{ url_for('index') }}">Back to Gallery</a>
+</body>
+</html>
