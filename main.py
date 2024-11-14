@@ -7,7 +7,7 @@ import google.generativeai as genai
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = 'Mamatabang69'
 bucket_name = 'project0image'
 
 
